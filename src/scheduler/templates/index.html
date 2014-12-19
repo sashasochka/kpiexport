@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    Home - {{ super() }}
+{% endblock title %}
+
+{% block content %}
+<header class="menu">
+    <div class="menu__logo--full"></div>
+</header>
+<section class="container">
+    <div class="row">
+        <h3 class="col-xs-12 col-sm-6 col-sm-offset-4 text-center">
+            <p class="segment hidden-xs"></p>
+            {{ lipsum() }}
+        </h3>
+    </div>
+    <div class="row">
+        <div class="segment hidden-xs">&nbsp;</div>        
+    </div>
+    <div class="row text-center">
+        {% if current_user %}
+        <div class="col-xs-6 col-sm-2 col-sm-offset-5 text-center">
+            <img src="{{ avatar }}" />
+            <b>Hi, {{ current_user }}!</b> [<a href="/logout">Logout</a>]
+        </div>
+        {% else %}
+        <div class="col-xs-6 col-sm-2">
+            <!--a href="{#% url 'login' %#}" class="btn btn-default">{#% trans "Sign In" %#}</a-->
+            <a href="login/" class="btn btn-default">Sign In</a>
+        </div>
+        {% endif %}
+    </div>
+    </section>
+</section>
+{% endblock content %}
+
+{% block extra_footer %}
+    {{ super() }}
+{% endblock extra_footer %}

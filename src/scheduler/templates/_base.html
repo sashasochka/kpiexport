@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}Student Scheduler{% endblock title %}
+    </title>
+    {% block extra_header %}
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    {% assets filters="cssmin,datauri", output="gen/packed.css", "css/reset.css" %}
+    <!--script type="text/javascript" src="{{ ASSET_URL }}"></script-->
+    <link href="{{ ASSET_URL }}" rel="stylesheet">
+    {% endassets %}
+    <!--link rel="icon" href="/static/img/favicon.png"-->
+    {% endblock extra_header %}
+</head>
+<body>
+{% block header %}{% endblock header %}
+{% block content %}{% endblock content %}
+{% block footer %}{% endblock footer %}
+{% block extra_footer %}{% endblock extra_footer %}
+</body>
+</html>

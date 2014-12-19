@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>KPI Exporter</title>
+    <base href="/">
+</head>
+<body ng-app="app" ng-controller="MainController">
+    <md-content layout="column" layout-align="center center" style="padding: 20px;" class="settings-form" >
+        <md-text-float label="НАЗВА ГРУПИ (кирилиця/латиниця, великі/малі літери - неважливо)" class="longer"
+                       ng-model="settings.groupName"></md-text-float>
+        <div layout="row" style="width: 100%" flex>
+            <md-button class="md-raised md-primary save-btn"
+                       href="/login/google" flex>Імпортувати у Google Calendar</md-button>
+        </div>
+        <br>
+        <a href="https://github.com/sochka/kpiexport/issues">Issue tracker</a>
+        <br>
+        Made by &copy; Oleksandr Sochka<br>
+        <iframe src="https://githubbadge.appspot.com/sochka" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>
+    </md-content>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower_components/hammerjs/hammer.min.js"></script>
+    <script src="/bower_components/angular-material/angular-material.min.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

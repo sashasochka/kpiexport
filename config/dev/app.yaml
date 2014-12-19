@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+port: 8888
+settings:
+    app_uri: https://kpiexport.herokuapp.com
+    db_uri: StudentScheduler
+    cookie_secret: your_cookie_secret
+    static_path: static
+    template_path: static
+    static_url_prefix: '.'
+    twitter_consumer_key: twi_key
+    twitter_consumer_secret: twi_secret
+    facebook_api_key: fb_key
+    facebook_secret: fb_secret
+    google_oauth:
+        key: 107429331396-3ug08alfldgnhcm4lkpn1hsilbm38atu.apps.googleusercontent.com
+        secret: ObJGQ_KneR2DrBbq_GazUX3X
+    login_url: /login
+    debug: True

@@ -1,0 +1,8 @@
+tornado==4.0.2
+MarkupSafe==0.23
+motorengine==0.8.11
+requests==2.5.0
+PyYAML==3.11
+asyncio==3.4.2
+pymongo==2.7.1
+-e .
