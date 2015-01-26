@@ -15,8 +15,8 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                         var ps = [];
                         for (var i = 0; i < classes.length; i++) {
                             var lesson = classes[i];
-                            var secondSemester = moment().month() > 6;
-                            var date = moment([moment().year(), secondSemester ? 8 : 1, 1, 8, 0]).day(lesson.day_number);
+                            var secondSemester = moment().month() < 6;
+                            var date = moment([moment().year(), secondSemester ? 1 : 8, 1, 8, 0]).day(lesson.day_number);
                             if (lesson.lesson_week === '2') {
                                 date.add(7, 'day');
                             }
@@ -32,11 +32,11 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                                     description: lesson.lesson_name + ' (' + lesson.lesson_type + ')\n' +
                                         'Викладач: ' + lesson.teacher_name,
                                     start: {
-                                        dateTime: moment().year() + '-09-' + daystr + 'T' + lesson.time_start,
+                                        dateTime: moment().year() + (secondSemester ? '-02-' : '-09-') + daystr + 'T' + lesson.time_start,
                                         timeZone: 'Europe/Kiev'
                                     },
                                     end: {
-                                        dateTime: moment().year() + '-09-' + daystr + 'T' + lesson.time_end,
+                                        dateTime: moment().year() + (secondSemester ? '-02-' : '-09-') + daystr + 'T' + lesson.time_end,
                                         timeZone: 'Europe/Kiev'
                                     },
                                     recurrence: [
