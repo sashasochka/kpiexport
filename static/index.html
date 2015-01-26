@@ -16,7 +16,7 @@
             <md-button class="md-raised md-primary save-btn"
                        href="/login/google" flex>Імпортувати у Google Calendar</md-button>
         </div>
-        <h3 ng-show="!status.msg" style="color: {[{status.color}]}">
+        <h3 ng-show="status.msg" style="color: {[{status.color}]}">
             <md-progress-circular ng-show="status.color!='green'" md-mode="determinate" value="{[{status.progress}]}"></md-progress-circular>
             Статус: <span ng-bind="status.msg"></span>
         </h3>
