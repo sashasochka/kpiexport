@@ -11,6 +11,8 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                     if (classes.statusCode === 404) {
                         status.msg = 'Групи не існує!';
                         status.color = 'red';
+                        status.progress = 100;
+                        cb(false);
                         return;
                     }
                     var calendarId;
