@@ -8,6 +8,11 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
             $http.post('/api/kpi_schedule/', {group: groupName})
                 .success(function (classes) {
                     console.log(classes);
+                    if (classes.statusCode === 404) {
+                        status.msg = 'Групи не існує!';
+                        status.color = 'red';
+                        return;
+                    }
                     var calendarId;
                     status.msg = 'Створення каландеря';
                     status.color = 'blue';
