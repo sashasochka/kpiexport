@@ -9,6 +9,7 @@
     <base href="/">
 </head>
 <body ng-app="app" ng-controller="MainController">
+    Status: <span ng-bind="status"></span>
     <md-content layout="column" layout-align="center center" style="padding: 20px;" class="settings-form" >
         <md-text-float label="НАЗВА ГРУПИ (кирилиця/латиниця, великі/малі літери - неважливо)" class="longer"
                        ng-model="settings.groupName"></md-text-float>

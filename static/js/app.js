@@ -1,11 +1,12 @@
 angular.module('app', ['ngMaterial', 'ngCookies'])
-    .factory('addToGCalendar', function ($http, $cookies, $q) {
+    .factory('addToGCalendar', function ($http, $cookies, $q, status) {
         var token = $cookies.google_access_token;
         return function (groupName, cb) {
             $http.post('/api/kpi_schedule/', {group: groupName})
                 .success(function (classes) {
                     console.log(classes);
                     var calendarId;
+                    status.msg = 'Створення каландеря';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
                         summary: "Розклад НТУУ \"КПІ\"",
                         description: "Автоматично створений розклад для НТУУ \"КПІ\"",
@@ -46,22 +47,38 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                                     location: "НТУУ КПІ (" + lesson.lesson_room + ")"
                             }));
                         }
+                        var loaded = 0;
+                        for (var j = 0; j < ps.length; ++j) {
+                            var p = ps[j];
+                            p.then(function () {
+                                ++loaded;
+                                status.msg = 'Створення пар: ' + loaded + '/' + ps.length;
+                            })
+                        }
                         $q.all(ps).then(function () {
                             cb(true);
+                            status.msg = 'Готово!';
                         }, function (err) {
+                            status.msg = 'Помилка під час створення пар в календарі!';
                             cb(false);
                         });
                     }).error(function (err) {
+                        status.msg = 'Помилка під час створення календаря!';
                         cb(false);
                     })
                 })
                 .error(function (err) {
+                    status.msg = 'Помилка під час запиту до API https://rozklad.org.ua!';
                     cb(false);
                 });
         }
     })
-    .controller('MainController', function ($scope, addToGCalendar, $cookies) {
+    .service('status', function () {
+        this.msg = '';
+    })
+    .controller('MainController', function ($scope, addToGCalendar, $cookies, status) {
         $scope.settings = $cookies;
+        $scope.status = status.msg;
     })
     .run(function($rootScope, $cookies, addToGCalendar) {
         if ($cookies.google_access_token) {
