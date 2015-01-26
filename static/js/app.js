@@ -57,6 +57,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                             p.then(function () {
                                 ++loaded;
                                 status.msg = 'Створення пар: ' + loaded + '/' + ps.length;
+                                status.progress = 100.0 * loaded / ps.length;
                                 status.color = 'blue';
                             })
                         }
@@ -84,6 +85,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
     })
     .service('status', function () {
         this.msg = '';
+        this.progress = 0;
     })
     .controller('MainController', function ($scope, addToGCalendar, $cookies, status) {
         $scope.settings = $cookies;
