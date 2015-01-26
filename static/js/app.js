@@ -48,14 +48,14 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                         }
                         $q.all(ps).then(function () {
                             cb(true);
-                        }, function () {
+                        }, function (err) {
                             cb(false);
                         });
-                    }).error(function () {
+                    }).error(function (err) {
                         cb(false);
                     })
                 })
-                .error(function () {
+                .error(function (err) {
                     cb(false);
                 });
         }
