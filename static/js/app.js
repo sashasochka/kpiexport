@@ -1,4 +1,7 @@
 angular.module('app', ['ngMaterial', 'ngCookies'])
+    .config(function($interpolateProvider){
+        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    })
     .factory('addToGCalendar', function ($http, $cookies, $q, status) {
         var token = $cookies.google_access_token;
         return function (groupName, cb) {
@@ -7,6 +10,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                     console.log(classes);
                     var calendarId;
                     status.msg = 'Створення каландеря';
+                    status.color = 'blue';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
                         summary: "Розклад НТУУ \"КПІ\"",
                         description: "Автоматично створений розклад для НТУУ \"КПІ\"",
@@ -53,22 +57,27 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                             p.then(function () {
                                 ++loaded;
                                 status.msg = 'Створення пар: ' + loaded + '/' + ps.length;
+                                status.color = 'blue';
                             })
                         }
                         $q.all(ps).then(function () {
                             cb(true);
                             status.msg = 'Готово!';
+                            status.color = 'green';
                         }, function (err) {
                             status.msg = 'Помилка під час створення пар в календарі!';
+                            status.color = 'red';
                             cb(false);
                         });
                     }).error(function (err) {
                         status.msg = 'Помилка під час створення календаря!';
+                        status.color = 'red';
                         cb(false);
                     })
                 })
                 .error(function (err) {
                     status.msg = 'Помилка під час запиту до API https://rozklad.org.ua!';
+                    status.color = 'red';
                     cb(false);
                 });
         }
@@ -78,7 +87,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
     })
     .controller('MainController', function ($scope, addToGCalendar, $cookies, status) {
         $scope.settings = $cookies;
-        $scope.status = status.msg;
+        $scope.status = status;
     })
     .run(function($rootScope, $cookies, addToGCalendar) {
         if ($cookies.google_access_token) {
