@@ -57,7 +57,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                             p.then(function () {
                                 ++loaded;
                                 status.msg = 'Створення пар: ' + loaded + '/' + ps.length;
-                                status.progress = 100.0 * loaded / ps.length;
+                                status.progress = 100 * loaded / ps.length;
                                 status.color = 'blue';
                             })
                         }
