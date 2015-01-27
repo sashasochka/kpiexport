@@ -96,7 +96,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
     })
     .controller('MainController', function ($scope, addToGCalendar, $cookies, status) {
         $scope.settings = $cookies;
-        $scope.settings.calendarName = "Розклад пар КПІ;
+        $scope.settings.calendarName = "Розклад пар КПІ";
         $scope.status = status;
     })
     .run(function($rootScope, $cookies, addToGCalendar) {
