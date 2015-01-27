@@ -19,7 +19,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                     status.msg = 'Створення каландеря';
                     status.color = 'blue';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
-                        summary: "Розклад НТУУ \"КПІ\"",
+                        summary: calendarName,
                         description: "Автоматично створений розклад для НТУУ \"КПІ\"",
                         location: "НТУУ КПІ, Київ, Україна"
                     }).success(function (calendar) {
