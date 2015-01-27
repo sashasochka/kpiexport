@@ -59,14 +59,18 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                             }));
                         }
                         var loaded = 0;
+                        var errors = 0;
                         for (var j = 0; j < ps.length; ++j) {
                             var p = ps[j];
                             p.then(function () {
                                 ++loaded;
-                                status.msg = 'Створення пар: ' + loaded + '/' + ps.length;
-                                status.progress = Math.ceil(100 * loaded / ps.length);
-                                status.color = 'blue';
-                            })
+                                status.msg = 'Створення пар: ' + loaded + '/' + ps.length + ', помилок - ' + errors;
+                                status.progress = Math.ceil(100 * (loaded+errors) / ps.length);
+                            }, function () {
+                                ++errors;
+                                status.msg = 'Створення пар: ' + loaded + '/' + ps.length + ', помилок - ' + errors;
+                                status.progress = Math.ceil(100 * (loaded+errors) / ps.length);
+                            });
                         }
                         $q.all(ps).then(function () {
                             cb(true);
