@@ -16,7 +16,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                         return;
                     }
                     var calendarId;
-                    status.msg = 'Створення каландеря';
+                    status.msg = 'Створення каландаря';
                     status.color = 'blue';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
                         summary: calendarName,
@@ -38,7 +38,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                             var day = date.date();
                             var daystr = date.format('DD');
                             ps.push($http.post(
-                                'https://www.googleapis.com/calendar/v3/calendars/' + 
+                                'https://www.googleapis.com/calendar/v3/calendars/' +
                                     calendarId + '/events?access_token=' + token, {
                                     summary: lesson.lesson_name,
                                     description: lesson.lesson_name + ' (' + lesson.lesson_type + ')\n' +
