@@ -4,7 +4,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
     })
     .factory('addToGCalendar', function ($http, $cookies, $q, status) {
         var token = $cookies.google_access_token;
-        return function (groupName, cb) {
+        return function (groupName, calendarName, cb) {
             $http.post('/api/kpi_schedule/', {group: groupName})
                 .success(function (classes) {
                     console.log(classes);
@@ -19,7 +19,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                     status.msg = 'Створення каландеря';
                     status.color = 'blue';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
-                        summary: "Розклад НТУУ \"КПІ\"",
+                        summary: calendarName,
                         description: "Автоматично створений розклад для НТУУ \"КПІ\"",
                         location: "НТУУ КПІ, Київ, Україна"
                     }).success(function (calendar) {
@@ -96,11 +96,12 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
     })
     .controller('MainController', function ($scope, addToGCalendar, $cookies, status) {
         $scope.settings = $cookies;
+        $scope.settings.calendarName = "Розклад пар КПІ";
         $scope.status = status;
     })
     .run(function($rootScope, $cookies, addToGCalendar) {
         if ($cookies.google_access_token) {
-            addToGCalendar($cookies.groupName, function (result) {
+            addToGCalendar($cookies.groupName, $cookies.calendarName, function (result) {
                 console.log('Result of adding to google calendar: ' + result);
                 delete $cookies.google_access_token;
             });
