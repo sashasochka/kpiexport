@@ -16,7 +16,7 @@ angular.module('app', ['ngMaterial', 'ngCookies'])
                         return;
                     }
                     var calendarId;
-                    status.msg = 'Створення каландаря';
+                    status.msg = 'Створення календаря';
                     status.color = 'blue';
                     $http.post('https://www.googleapis.com/calendar/v3/calendars/?access_token=' + token, {
                         summary: calendarName,
